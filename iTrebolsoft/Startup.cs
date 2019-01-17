@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Application.IServices;
 using Application.Services;
-using Domain;
 using Domain.IRepositories;
+using Infraestructure.Persistencia;
 using Infraestructure.Repositories;
 using iTrebolsoft.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace iTrebolsoft
@@ -47,9 +40,11 @@ namespace iTrebolsoft
 
             // REPOSITORIES
             services.AddTransient<IUserRepository, EFUserRepository>();
+            services.AddTransient<IBlogRepository, EFBlogRepository>();
 
             // SERVICES
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IBlogService, BlogService>();
 
             // 
 

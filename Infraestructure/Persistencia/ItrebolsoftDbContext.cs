@@ -1,8 +1,9 @@
 ﻿using System;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Domain
+namespace Infraestructure.Persistencia
 {
     public partial class ItrebolsoftDbContext : DbContext
     {
@@ -36,7 +37,8 @@ namespace Domain
 
             modelBuilder.Entity<TBlog>(entity =>
             {
-                entity.HasKey(e => e.PublId);
+                entity.HasKey(e => e.PublId)
+                    .HasName("PK_t_blog_1");
 
                 entity.ToTable("t_blog");
 
@@ -44,7 +46,7 @@ namespace Domain
                     .HasColumnName("publ_id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.FkUserUserId).HasColumnName("fk_user_user_id");
+                entity.Property(e => e.FkTUserUserId).HasColumnName("fk_t_user_user_id");
 
                 entity.Property(e => e.PublBody)
                     .HasColumnName("publ_body")
@@ -65,10 +67,10 @@ namespace Domain
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.FkUserUser)
+                entity.HasOne(d => d.FkTUserUser)
                     .WithMany(p => p.TBlog)
-                    .HasForeignKey(d => d.FkUserUserId)
-                    .HasConstraintName("FK_t_blog_t_user");
+                    .HasForeignKey(d => d.FkTUserUserId)
+                    .HasConstraintName("FK_t_blog_t_user1");
             });
 
             modelBuilder.Entity<TImages>(entity =>
@@ -81,7 +83,11 @@ namespace Domain
                     .HasColumnName("image_id")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.FkTBlogPublId).HasColumnName("fk_t_blog_publ_id");
+
                 entity.Property(e => e.FkTProductoProdId).HasColumnName("fk_t_producto_prod_id");
+
+                entity.Property(e => e.FkTProyProyId).HasColumnName("fk_t_proy_proy_id");
 
                 entity.Property(e => e.ImageName)
                     .HasColumnName("image_name")
@@ -93,10 +99,20 @@ namespace Domain
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.FkTBlogPubl)
+                    .WithMany(p => p.TImages)
+                    .HasForeignKey(d => d.FkTBlogPublId)
+                    .HasConstraintName("FK_t_images_t_blog");
+
                 entity.HasOne(d => d.FkTProductoProd)
                     .WithMany(p => p.TImages)
                     .HasForeignKey(d => d.FkTProductoProdId)
                     .HasConstraintName("FK_t_images_t_producto");
+
+                entity.HasOne(d => d.FkTProyProy)
+                    .WithMany(p => p.TImages)
+                    .HasForeignKey(d => d.FkTProyProyId)
+                    .HasConstraintName("FK_t_images_t_proyectos");
             });
 
             modelBuilder.Entity<TProducto>(entity =>
@@ -157,7 +173,7 @@ namespace Domain
                     .HasColumnName("proy_id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.FkUserUserId).HasColumnName("fk_user_user_id");
+                entity.Property(e => e.FkTUserUserId).HasColumnName("fk_t_user_user_id");
 
                 entity.Property(e => e.ProyDate)
                     .HasColumnName("proy_date")
@@ -173,10 +189,10 @@ namespace Domain
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.FkUserUser)
+                entity.HasOne(d => d.FkTUserUser)
                     .WithMany(p => p.TProyectos)
-                    .HasForeignKey(d => d.FkUserUserId)
-                    .HasConstraintName("FK_t_proyectos_t_user");
+                    .HasForeignKey(d => d.FkTUserUserId)
+                    .HasConstraintName("FK_t_proyectos_t_user1");
             });
 
             modelBuilder.Entity<TUser>(entity =>

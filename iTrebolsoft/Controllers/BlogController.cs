@@ -8,51 +8,51 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTrebolsoft.Controllers
 {
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class BlogController : Controller
     {
-        IUserService Service;
-        public UserController(IUserService service)
+        IBlogService Service;
+        public BlogController(IBlogService service)
         {
             Service = service;
         }
 
         [HttpGet]
-        public IList<UserDTO> Get()
+        public IList<BlogDTO> Get()
         {
             return Service.GetAll();
         }
 
         // GET api/<controller>/5
-        [HttpGet("{UserId}")]
-        public UserDTO Get(Guid UserId)
+        [HttpGet("{PublId}")]
+        public BlogDTO Get(Guid PublId)
         {
             return Service.GetAll()
-                .Where(u => u.UserId == UserId)
+                .Where(b => b.PublId == PublId)
                 .FirstOrDefault();
         }
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]UserDTO user)
+        public IActionResult Post([FromBody]BlogDTO publ)
         {
-            Service.Insert(user);
+            Service.Insert(publ);
             return Ok(true);
         }
 
         // PUT api/<controller>/5
-        [HttpPut("{UserId}")]
-        public IActionResult Put(Guid UserId, [FromBody]UserDTO user)
+        [HttpPut("{PublId}")]
+        public IActionResult Put(Guid PublId, [FromBody]BlogDTO Publ)
         {
-            user.UserId = UserId;
-            Service.Update(user);
+            Publ.PublId = PublId;
+            Service.Update(Publ);
             return Ok(true);
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("{UserId}")]
-        public IActionResult Delete(Guid UserId)
+        [HttpDelete("{PublId}")]
+        public IActionResult Delete(Guid PublId)
         {
-            Service.Delete(UserId);
+            Service.Delete(PublId);
             return Ok(true);
         }
     }
