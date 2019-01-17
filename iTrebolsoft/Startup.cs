@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.IServices;
+using Application.Services;
 using Domain;
+using Domain.IRepositories;
+using Infraestructure.Repositories;
 using iTrebolsoft.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,8 +35,7 @@ namespace iTrebolsoft
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ItrebolsoftDbContext>(options =>
-            options.UseSqlServer(
-            Configuration["Data:Itrebolsoft:ConnectionString"]));
+            options.UseSqlServer(Configuration["Data:Itrebolsoft:ConnectionString"]));
 
             services.AddDbContext<AppIdentityDbContext>(options =>
            options.UseSqlServer(
@@ -42,11 +45,21 @@ namespace iTrebolsoft
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddDefaultTokenProviders();
 
+            // REPOSITORIES
+            services.AddTransient<IUserRepository, EFUserRepository>();
+
+            // SERVICES
+            services.AddTransient<IUserService, UserService>();
+
+            // 
+
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info { Title = "CodiJobServices", Version = "v1" });
+                var contacto = new Contact { Name = "Daniel I. Cabana", Email = "trebolman@gmail.com", Url = "itrebolsoft.com" };
+                c.SwaggerDoc("v1", new Info { Title = "Itrebolsoft", Version = "v1" , Contact = contacto });
+
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,11 +69,6 @@ namespace iTrebolsoft
             {
                 app.UseDeveloperExceptionPage();
             }
-            //else
-            //{
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

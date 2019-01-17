@@ -14,7 +14,7 @@ namespace iTrebolsoft.Model
             IdentityUser user = await userManager.FindByIdAsync(adminUser);
             if (user == null)
             {
-                user = new IdentityUser("Admin");
+                user = new IdentityUser("Daniele");
                 await userManager.CreateAsync(user, adminPassword);
             }
         }
