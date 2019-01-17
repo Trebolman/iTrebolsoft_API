@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using iTrebolsoft.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,14 @@ namespace iTrebolsoft
             options.UseSqlServer(
             Configuration["Data:Itrebolsoft:ConnectionString"]));
 
+            services.AddDbContext<AppIdentityDbContext>(options =>
+           options.UseSqlServer(
+           Configuration["Data:ItrebolsoftIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info { Title = "CodiJobServices", Version = "v1" });
             });
@@ -46,11 +56,11 @@ namespace iTrebolsoft
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            //else
+            //{
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -58,8 +68,10 @@ namespace iTrebolsoft
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
