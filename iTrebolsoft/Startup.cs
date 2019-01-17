@@ -41,10 +41,16 @@ namespace iTrebolsoft
             // REPOSITORIES
             services.AddTransient<IUserRepository, EFUserRepository>();
             services.AddTransient<IBlogRepository, EFBlogRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddTransient<IProyectoRepository, EFProyectoRepository>();
+            services.AddTransient<IImageRepository, EFImageRepository>();
 
             // SERVICES
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBlogService, BlogService>();
+            services.AddTransient<IProyectoService, ProyectoService>();
+            services.AddTransient<IProductoService, ProductoService>();
+            services.AddTransient<IImageService, ImageService>();
 
             // 
 

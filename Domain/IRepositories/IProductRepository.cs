@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 namespace Domain.IRepositories
 {
-    public interface IBlogRepository:IRepository<TBlog>
+    public interface IProductRepository : IRepository<TProducto>
     {
         //IQueryable<TBlog> FilterBlogs(int pageSize, int page);
     }
