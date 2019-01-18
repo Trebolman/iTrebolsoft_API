@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTrebolsoft.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class ProyectController : Controller
     {
         IProyectoService Service;
@@ -18,7 +19,6 @@ namespace iTrebolsoft.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public IList<ProyectoDTO> Get()
         {
             return Service.GetAll();

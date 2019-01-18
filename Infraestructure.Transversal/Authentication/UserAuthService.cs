@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -17,41 +18,50 @@ namespace Infraestructure.Transversal.Authentication
         private SignInManager<IdentityUser> signInManager;
         private IUserService ServiceUser;
         private readonly AppSettings _appSettings;
+
         public UserAuthService(UserManager<IdentityUser> userMgr,
         SignInManager<IdentityUser> signInMgr,
-        IUserService serviceUsuarioPerfil,
+        IUserService serviceUser,
         IOptions<AppSettings> appSettings)
         {
             userManager = userMgr;
             signInManager = signInMgr;
-            ServiceUser = serviceUsuarioPerfil;
+            ServiceUser = serviceUser;
             _appSettings = appSettings.Value;
         }
-        public async Task<UserDTO> AuthenticateAsync(string username, string
-        password)
+        public async Task<UserDTO> AuthenticateAsync(string username, string password)
         {
             IdentityUser Iuser = await userManager.FindByNameAsync(username);
-            if (Iuser != null)
+            if(Iuser != null)
             {
                 await signInManager.SignOutAsync();
-                if ((await signInManager.PasswordSignInAsync(Iuser, password, false,
-                false)).Succeeded)
+                if ((await signInManager.PasswordSignInAsync(Iuser, password, false, false)).Succeeded)
                 {
                     var UserDTO = ServiceUser.GetUser(Guid.Parse(Iuser.Id));
 
-                    //Add WebToken after Login sucsessfully
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+
+                    //var tokenDescriptor = new SecurityTokenDescriptor();
+                    ////{
+                    //var claim = new Claim(ClaimTypes.Name, UserDTO.UserId.ToString());
+                    //Claim[] claims = { claim };
+                    //tokenDescriptor.Subject = new ClaimsIdentity(claims);
+
+                    //    //new Claim[] { new Claim(ClaimTypes.Name, UserDTO.UserId.ToString()) }
+                    //tokenDescriptor.Expires = DateTime.UtcNow.AddDays(7);
+                    //tokenDescriptor.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+                    ////};
+
+
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
-                        Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name, UserDTO.UserId.ToString())
-                    }),
+                        Subject = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, UserDTO.UserId.ToString()) }),
                         Expires = DateTime.UtcNow.AddDays(7),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature)
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                     };
+
+
                     var token = tokenHandler.CreateToken(tokenDescriptor);
                     UserDTO.Token = tokenHandler.WriteToken(token);
 
@@ -60,9 +70,10 @@ namespace Infraestructure.Transversal.Authentication
             }
             return null;
         }
-    }
-    public class AppSettings
-    {
-        public string Secret { get; set; }
+
+        public class AppSettings
+        {
+            public string Secret { get; set; }
+        }
     }
 }

@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
+using static Infraestructure.Transversal.Authentication.UserAuthService;
 
 namespace iTrebolsoft
 {
@@ -60,6 +61,7 @@ namespace iTrebolsoft
             services.AddTransient<IProyectoService, ProyectoService>();
             services.AddTransient<IProductoService, ProductoService>();
             services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IUserAuthService, UserAuthService>();
 
             // VALIDATORS
             services.AddTransient<IValidator<ProyectoDTO>, ProyectoDTOValidator>();

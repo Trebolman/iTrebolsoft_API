@@ -6,7 +6,7 @@ namespace iTrebolsoft.Model
     public static class IdentitySeedData
     {
         private const string adminUser = "Daniele";
-        private const string adminPassword = "Daniele1234";
+        private const string adminPassword = "Daniele123$";
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
             UserManager<IdentityUser> userManager = app.ApplicationServices

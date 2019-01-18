@@ -37,8 +37,9 @@ namespace Infraestructure.Persistencia
 
             modelBuilder.Entity<TBlog>(entity =>
             {
-                entity.HasKey(e => e.PublId)
-                    .HasName("PK_t_blog_1");
+                //entity.HasKey(e => e.PublId)
+                //    .HasName("PK_t_blog_1");
+                entity.HasKey(e => e.PublId);
 
                 entity.ToTable("t_blog");
 
