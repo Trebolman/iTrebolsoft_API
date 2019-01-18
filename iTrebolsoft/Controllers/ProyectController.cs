@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Application.DTOs;
 using Application.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTrebolsoft.Controllers
@@ -17,6 +18,7 @@ namespace iTrebolsoft.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IList<ProyectoDTO> Get()
         {
             return Service.GetAll();
