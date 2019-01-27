@@ -10,7 +10,7 @@ namespace Infraestructure.Transversal.Swagger
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new Info { Title = "CodiJobService API v1.0", Version = "v1.0" });
+                c.SwaggerDoc("v1.0", new Info { Title = "ITrebolsoft API v1.0", Version = "v1.0" });
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
                 {"Bearer", new string[] { }},
@@ -32,7 +32,7 @@ namespace Infraestructure.Transversal.Swagger
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Versioned API v1.0");
-                c.DocumentTitle = "CodiJobService";
+                c.DocumentTitle = "ITrebolsoft_API";
                 c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
             });
             return app;

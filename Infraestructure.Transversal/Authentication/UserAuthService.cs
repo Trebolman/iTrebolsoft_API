@@ -42,18 +42,6 @@ namespace Infraestructure.Transversal.Authentication
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
-                    //var tokenDescriptor = new SecurityTokenDescriptor();
-                    ////{
-                    //var claim = new Claim(ClaimTypes.Name, UserDTO.UserId.ToString());
-                    //Claim[] claims = { claim };
-                    //tokenDescriptor.Subject = new ClaimsIdentity(claims);
-
-                    //    //new Claim[] { new Claim(ClaimTypes.Name, UserDTO.UserId.ToString()) }
-                    //tokenDescriptor.Expires = DateTime.UtcNow.AddDays(7);
-                    //tokenDescriptor.SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
-                    ////};
-
-
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, UserDTO.UserId.ToString()) }),
