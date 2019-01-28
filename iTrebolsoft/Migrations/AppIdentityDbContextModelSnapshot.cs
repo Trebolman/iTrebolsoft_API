@@ -70,8 +70,8 @@ namespace iTrebolsoft.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    //b.Property<string>("ConcurrencyStamp")
-                    //    .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);

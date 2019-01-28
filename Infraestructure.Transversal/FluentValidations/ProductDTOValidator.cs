@@ -12,7 +12,6 @@ namespace Infraestructure.Transversal.FluentValidations
             RuleFor(x => x.ProdCod).NotEmpty();
             RuleFor(x => x.ProdCod).Length(10, 100);
             RuleFor(x => x.ProdDesc).NotEmpty();
-            RuleFor(x => x.ProdDesc).Length(10, 100);
             RuleFor(x => x.ProdPrice).NotEmpty();
             RuleFor(x => x.FkUserUserId).NotEmpty();
         }

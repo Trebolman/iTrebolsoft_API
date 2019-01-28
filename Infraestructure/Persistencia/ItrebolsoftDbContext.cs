@@ -217,9 +217,21 @@ namespace Infraestructure.Persistencia
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserName)
+                entity.Property(e => e.UserFirstName)
                     .IsRequired()
-                    .HasColumnName("user_name")
+                    .HasColumnName("user_first_name")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserLastname)
+                    .IsRequired()
+                    .HasColumnName("user_last_name")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserGit)
+                    .IsRequired()
+                    .HasColumnName("user_git")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -228,8 +240,8 @@ namespace Infraestructure.Persistencia
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserRango)
-                    .HasColumnName("user_rango")
+                entity.Property(e => e.UserRole)
+                    .HasColumnName("user_role")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

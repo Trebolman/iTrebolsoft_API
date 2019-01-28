@@ -15,6 +15,7 @@ namespace Domain
         public string ProyDesc { get; set; }
         public DateTime? ProyDate { get; set; }
         public Guid? FkTUserUserId { get; set; }
+        //public byte[] RowVersion { get; set; }
 
         public virtual TUser FkTUserUser { get; set; }
         public virtual ICollection<TImages> TImages { get; set; }

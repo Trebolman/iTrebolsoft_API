@@ -8,6 +8,7 @@ namespace Application.IServices
     public interface IUserService
     {
         void Insert(UserDTO entityDTO);
+        void InsertWithID(UserDTO entityDTO);
         IList<UserDTO> GetAll();
         void Update(UserDTO entityDTO);
         void Delete(Guid entityId);

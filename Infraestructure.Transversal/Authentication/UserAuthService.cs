@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,6 @@ namespace Infraestructure.Transversal.Authentication
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                     };
 
-
                     var token = tokenHandler.CreateToken(tokenDescriptor);
                     UserDTO.Token = tokenHandler.WriteToken(token);
 
@@ -57,6 +57,48 @@ namespace Infraestructure.Transversal.Authentication
                 }
             }
             return null;
+        }
+
+        public async Task AddUserAsync(addUserDTO dto)
+        {
+            IdentityUser userExist = await userManager.FindByNameAsync(dto.UserName);
+            if(userExist == null)
+            {
+                Guid NewId = Guid.NewGuid();
+                userExist = new IdentityUser(dto.UserName);
+                userExist.Id = NewId.ToString();
+                IdentityResult result = await userManager.CreateAsync(userExist, dto.Password);
+                StringBuilder StringError = new StringBuilder();
+                foreach(var error in result.Errors)
+                {
+                    StringError.Append(error.Description);
+                    StringError.Append("\n");
+                }
+                if (result.Errors.Count() > 0)
+                {
+                    throw new Exception(StringError.ToString());
+                }
+                else
+                {
+                    UserDTO userDTO = new UserDTO()
+                    {
+                        UserId = NewId,
+                        UserAddress = dto.UserAddress,
+                        UserEmail = dto.UserEmail,
+                        UserFirstName = dto.UserFirstName,
+                        UserLastname = dto.UserLastname,
+                        UserGit = dto.UserGit,
+                        UserPhone = dto.UserPhone,
+                        UserRole = dto.UserRole,
+                        UserWeb = dto.UserWeb
+                    };
+                    ServiceUser.InsertWithID(userDTO);
+                }
+            }
+            else
+            {
+                throw new Exception($"The username({dto.UserName}) is being used");
+            }
         }
 
         public class AppSettings

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Infraestructure.Persistencia;
+using System.Threading.Tasks;
+
 namespace Infraestructure.Repositories
 {
     public class EFUserRepository : IUserRepository
@@ -41,16 +43,27 @@ namespace Infraestructure.Repositories
                 .FirstOrDefault(u => u.UserId == item.UserId);
                 if (dbEntry != null)
                 {
-                    dbEntry.UserName = item.UserName;
+                    dbEntry.UserFirstName = item.UserFirstName;
+                    dbEntry.UserLastname = item.UserLastname;
+                    dbEntry.UserGit = item.UserGit;
                     dbEntry.UserEmail = item.UserEmail;
                     dbEntry.UserAddress = item.UserAddress;
                     dbEntry.UserPhone = item.UserPhone;
-                    dbEntry.UserRango = item.UserRango;
+                    dbEntry.UserRole = item.UserRole;
                     dbEntry.UserWeb = item.UserWeb;
 
                 }
             }
             Context.SaveChangesAsync();
+        }
+
+        public async Task SaveWithId(TUser user)
+        {
+            if (user.UserId != Guid.Empty)
+            {
+                Context.TUser.Add(user);
+                await Context.SaveChangesAsync();
+            }
         }
     }
 }

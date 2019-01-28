@@ -10,7 +10,8 @@ namespace Infraestructure.Transversal.Swagger
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new Info { Title = "ITrebolsoft API v1.0", Version = "v1.0" });
+                var contacto = new Contact { Name = "Daniel I. Cabana", Email = "trebolman@gmail.com", Url = "https://www.itrebolsoft.com/" };
+                c.SwaggerDoc("v1.0", new Info { Title = "ITrebolsoft API v1.0", Version = "v1.0", Contact = contacto });
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
                 {"Bearer", new string[] { }},

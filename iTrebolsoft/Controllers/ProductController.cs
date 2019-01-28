@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Application.DTOs;
 using Application.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTrebolsoft.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     public class ProductController : Controller
     {
         IProductoService Service;

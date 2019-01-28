@@ -20,7 +20,9 @@ namespace iTrebolsoft
 
         public static IWebHost CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                //.UseKestrel()
                 .UseStartup<Startup>()
+                //.UseIISIntegration()
                 .UseDefaultServiceProvider(options =>
                 options.ValidateScopes = false).Build();
 

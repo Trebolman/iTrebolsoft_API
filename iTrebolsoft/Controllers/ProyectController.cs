@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTrebolsoft.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class ProyectController : Controller
     {
         IProyectoService Service;

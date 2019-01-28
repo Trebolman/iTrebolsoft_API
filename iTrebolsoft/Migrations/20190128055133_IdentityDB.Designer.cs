@@ -10,8 +10,8 @@ using iTrebolsoft.Model;
 namespace iTrebolsoft.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20190117005415_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20190128055133_IdentityDB")]
+    partial class IdentityDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

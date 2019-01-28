@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace iTrebolsoft.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class IdentityDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

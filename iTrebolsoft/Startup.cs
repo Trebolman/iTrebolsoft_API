@@ -90,11 +90,22 @@ namespace iTrebolsoft
                 };
             });
 
-            services.AddSwaggerGen(c => {
-                var contacto = new Contact { Name = "Daniel I. Cabana", Email = "trebolman@gmail.com", Url = "itrebolsoft.com" };
-                c.SwaggerDoc("v1", new Info { Title = "Itrebolsoft", Version = "v1" , Contact = contacto });
+            // agregar Swagger
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("V2", new Info
+            //    {
+            //        Title = "iTRebolsoftService",
+            //        Version = "V1",
+            //        Contact = new Contact
+            //        {
+            //            Name = "Daniel I. Cabana",
+            //            Email = "icabanah@unsa.edu.pe",
+            //            Url = "https://www.itrebolsoft.com/"
+            //        }
+            //    });
+            //});
 
-            });
             services.AddSwaggerDocumentation();
             services.AddMvc().AddFluentValidation();
         }
@@ -114,10 +125,9 @@ namespace iTrebolsoft
             //});
 
             app.UseSwaggerDocumentation();
-            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
-            IdentitySeedData.EnsurePopulated(app);
+            //IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

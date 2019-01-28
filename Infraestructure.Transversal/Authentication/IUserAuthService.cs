@@ -6,5 +6,6 @@ namespace Infraestructure.Transversal.Authentication
     public interface IUserAuthService
     {
         Task<UserDTO> AuthenticateAsync(string username, string password);
+        Task AddUserAsync(addUserDTO dto);
     }
 }

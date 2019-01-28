@@ -43,6 +43,12 @@ namespace Application.Services
             repository.Save(entity);
         }
 
+        public void InsertWithID(UserDTO entityDTO)
+        {
+            TUser entity = Builders.GenericBuilder.builderDTOEntity<TUser, UserDTO>(entityDTO);
+            repository.SaveWithId(entity);
+        }
+
         public void Update(UserDTO entityDTO)
         {
             var entity = Builders.
