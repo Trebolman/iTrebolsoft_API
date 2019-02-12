@@ -35,19 +35,18 @@ namespace iTrebolsoft.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]BlogDTO publ)
+        public Guid Post([FromBody]BlogDTO publ)
         {
-            Service.Insert(publ);
-            return Ok(true);
+            return Service.Insert(publ);
         }
 
         // PUT api/<controller>/5
         [HttpPut("{PublId}")]
-        public IActionResult Put(Guid PublId, [FromBody]BlogDTO Publ)
+        public Guid Put(Guid PublId, [FromBody]BlogDTO Publ)
         {
             Publ.PublId = PublId;
-            Service.Update(Publ);
-            return Ok(true);
+            return Service.Update(Publ);
+            //return Ok(true);
         }
 
         // DELETE api/<controller>/5

@@ -30,12 +30,14 @@ namespace Infraestructure.Repositories
             }
         }
 
-        public void Save(TUser item)
+        public Guid Save(TUser item)
         {
+            Guid Id;
             if (item.UserId == Guid.Empty)
             {
                 item.UserId = Guid.NewGuid();
                 Context.TUser.Add(item);
+                Id = item.UserId;
             }
             else
             {
@@ -51,10 +53,11 @@ namespace Infraestructure.Repositories
                     dbEntry.UserPhone = item.UserPhone;
                     dbEntry.UserRole = item.UserRole;
                     dbEntry.UserWeb = item.UserWeb;
-
                 }
+                Id = dbEntry.UserId;
             }
             Context.SaveChangesAsync();
+            return Id;
         }
 
         public async Task SaveWithId(TUser user)

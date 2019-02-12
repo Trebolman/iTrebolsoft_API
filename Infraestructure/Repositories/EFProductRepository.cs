@@ -29,12 +29,14 @@ namespace Infraestructure.Repositories
             }
         }
 
-        public void Save(TProducto item)
+        public Guid Save(TProducto item)
         {
+            Guid Id;
             if (item.ProdId == Guid.Empty)
             {
                 item.ProdId = Guid.NewGuid();
                 Context.TProducto.Add(item);
+                Id = item.ProdId;
             }
             else
             {
@@ -50,8 +52,10 @@ namespace Infraestructure.Repositories
                     dbEntry.ProdPrice = item.ProdPrice;
                     dbEntry.FkUserUserId = item.FkUserUserId;
                 }
+                Id = item.ProdId;
             }
             Context.SaveChangesAsync();
+            return Id;
         }
     }
 }

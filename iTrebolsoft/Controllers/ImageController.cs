@@ -7,23 +7,29 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTrebolsoft.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     public class ImageController : Controller
     {
-         IImageService Service;
+        IImageService Service;
         public ImageController(IImageService service)
         {
             Service = service;
         }
 
-        [HttpGet]
+        [HttpGet("GetImages")]
         public IList<ImagesDTO> Get()
         {
             return Service.GetAll();
         }
 
+        [HttpGet("GetImagesByPublId/{PublId}")]
+        public IList<ImagesDTO> Post(Guid PublId)
+        {
+            return Service.GetAllImageFromPublish(PublId);
+        }
+
         // GET api/<controller>/5
-        [HttpGet("{ImageId}")]
+        [HttpGet("GetImageById/{ImageId}")]
         public ImagesDTO Get(Guid ImageId)
         {
             return Service.GetAll()
@@ -32,15 +38,15 @@ namespace iTrebolsoft.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost]
-        public IActionResult Post([FromBody] ImagesDTO image)
+        [HttpPost("CreateImage")]
+        public Guid Post([FromBody] ImagesDTO image)
         {
-            Service.Insert(image);
-            return Ok(true);
+            return Service.Insert(image);
+            //return Ok(true);
         }
 
         // PUT api/<controller>/5
-        [HttpPut("{ImageId}")]
+        [HttpPut("UploadImageById/{ImageId}")]
         public IActionResult Put(Guid ImageId, [FromBody] ImagesDTO image)
         {
             image.ImageId = ImageId;
@@ -49,10 +55,21 @@ namespace iTrebolsoft.Controllers
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("{ImageId}")]
+        [HttpDelete("DeleteImageById/{ImageId}")]
         public IActionResult Delete(Guid ImageId)
         {
             Service.Delete(ImageId);
+            return Ok(true);
+        }
+
+        [HttpDelete("DeleteImageByPublId/{PublId}")]
+        public IActionResult DeleteImagePubl (Guid PublId)
+        {
+            var ImagesPubl = Service.GetAllImageFromPublish(PublId);
+            foreach (var Image in ImagesPubl)
+            {
+                Service.Delete(Image.ImageId);
+            }
             return Ok(true);
         }
     }

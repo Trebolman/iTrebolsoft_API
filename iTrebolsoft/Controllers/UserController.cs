@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace iTrebolsoft.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class UserController : Controller
     {
         IUserService Service;
@@ -35,10 +35,10 @@ namespace iTrebolsoft.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]UserDTO user)
+        public Guid Post([FromBody]UserDTO user)
         {
-            Service.Insert(user);
-            return Ok(true);
+            return Service.Insert(user);
+            //return Ok(true);
         }
 
         // PUT api/<controller>/5

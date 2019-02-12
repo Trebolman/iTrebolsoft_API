@@ -35,17 +35,20 @@ namespace Infraestructure.Repositories
             .Take(pageSize);
         }
 
-        public void Save(TBlog item)
+        public Guid Save(TBlog item)
         {
+            Guid Id;
             if (item.PublId == Guid.Empty)
             {
                 item.PublId = Guid.NewGuid();
                 Context.TBlog.Add(item);
+                Id = item.PublId;
             }
             else
             {
                 TBlog dbEntry = Context.TBlog
                 .FirstOrDefault(b => b.PublId == item.PublId);
+                Id = dbEntry.PublId;
                 if (dbEntry != null)
                 {
                     dbEntry.PublName = item.PublName;
@@ -53,10 +56,10 @@ namespace Infraestructure.Repositories
                     dbEntry.PublDate = item.PublDate;
                     dbEntry.PublDesc = item.PublDesc;
                     dbEntry.TImages = item.TImages;
-
                 }
             }
             Context.SaveChangesAsync();
+            return Id;
         }
     }
 }

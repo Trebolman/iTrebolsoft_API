@@ -1,0 +1,14 @@
+Scaffold-DbContext "Data Source = DANOSHINPC\SQLEXPRESS; Initial Catalog = CarsDB; Integrated Security = True" Microsoft.EntityFrameworkCore.SqlServer -Context "CarsDbContext" -OutputDir Models/CarsServiceDbContext
+
+-----------AZURE--------------
+Scaffold-DbContext "data source = itrebolsoftserver.database.windows.net; initial catalog = Itrebolsoft; user id = daniele; password = Danoshin@7" Microsoft.EntityFrameworkCore.SqlServer -Context "ItrebolsoftDbContext" -project Domain
+
+add-migration InitMigration -Context ItrebolsoftDbContext -project Infraestructure
+Update-Database -Context ItrebolsoftDbContext
+
+add-migration IdentityDB -Context AppIdentityDbContext
+Update-Database -context AppIdentityDbContext
+-----------AZURE----------------
+
+add-migration RowVersionToProyecto -Context ItrebolsoftDbContext -project Infraestructure
+Update-Database -Context ItrebolsoftDbContext

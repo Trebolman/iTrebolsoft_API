@@ -31,22 +31,29 @@ namespace Application.Services
                    (BlogsEntities);
         }
 
-        public void Insert(BlogDTO entityDTO)
+        public BlogDTO GetBlog(Guid entityId)
+        {
+            var entities = repository.Items;
+            var elemento = repository.Items.Where(x => x.PublId == entityId).FirstOrDefault();
+            return Builders.GenericBuilder.builderEntityDTO<BlogDTO, TBlog>(elemento);
+        }
+
+        public Guid Insert(BlogDTO entityDTO)
         {
             TBlog entity = Builders.
                         GenericBuilder.
-                        builderDTOEntity < TBlog, BlogDTO>
+                        builderDTOEntity<TBlog, BlogDTO>
                         (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
 
-        public void Update(BlogDTO entityDTO)
+        public Guid Update(BlogDTO entityDTO)
         {
             var entity = Builders.
                 GenericBuilder.
                 builderDTOEntity<TBlog, BlogDTO>
                 (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
     }
 }

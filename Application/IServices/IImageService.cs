@@ -7,9 +7,10 @@ namespace Application.IServices
 {
     public interface IImageService
     {
-        void Insert(ImagesDTO entityDTO);
+        Guid Insert(ImagesDTO entityDTO);
         IList<ImagesDTO> GetAll();
-        void Update(ImagesDTO entityDTO);
+        IList<ImagesDTO> GetAllImageFromPublish(Guid entityId);
+        Guid Update(ImagesDTO entityDTO);
         void Delete(Guid entityId);
         ImagesDTO GetImage(Guid entityId);
     }

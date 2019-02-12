@@ -7,9 +7,10 @@ namespace Application.IServices
 {
     public interface IBlogService
     {
-        void Insert(BlogDTO entityDTO);
+        Guid Insert(BlogDTO entityDTO);
         IList<BlogDTO> GetAll();
-        void Update(BlogDTO entityDTO);
+        Guid Update(BlogDTO entityDTO);
         void Delete(Guid entityId);
+        BlogDTO GetBlog(Guid entityId);
     }
 }

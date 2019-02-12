@@ -16,6 +16,7 @@ namespace Application.Services
         {
             this.repository = repository;
         }
+
         public void Delete(Guid entityId)
         {
             repository.Delete(entityId);
@@ -27,6 +28,14 @@ namespace Application.Services
             return Builders.GenericBuilder.builderListEntityDTO<ImagesDTO, TImages>(Entities);
         }
 
+        public IList<ImagesDTO> GetAllImageFromPublish(Guid entityId)
+        {
+            var entities = repository.Items;
+            var elementos = repository.Items.Where(x => x.FkTBlogPublId == entityId);
+            return Builders.GenericBuilder.builderListEntityDTO<ImagesDTO,TImages>(elementos);
+
+        }
+
         public ImagesDTO GetImage(Guid entityId)
         {
             var entities = repository.Items;
@@ -34,22 +43,22 @@ namespace Application.Services
             return Builders.GenericBuilder.builderEntityDTO<ImagesDTO, TImages>(elemento);
         }
 
-        public void Insert(ImagesDTO entityDTO)
+        public Guid Insert(ImagesDTO entityDTO)
         {
             TImages entity = Builders.
                         GenericBuilder.
                         builderDTOEntity<TImages, ImagesDTO>
                         (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
 
-        public void Update(ImagesDTO entityDTO)
+        public Guid Update(ImagesDTO entityDTO)
         {
             var entity = Builders.
                 GenericBuilder.
                 builderDTOEntity<TImages, ImagesDTO>
                 (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
     }
 }

@@ -7,10 +7,10 @@ namespace Application.IServices
 {
     public interface IUserService
     {
-        void Insert(UserDTO entityDTO);
+        Guid Insert(UserDTO entityDTO);
         void InsertWithID(UserDTO entityDTO);
         IList<UserDTO> GetAll();
-        void Update(UserDTO entityDTO);
+        Guid Update(UserDTO entityDTO);
         void Delete(Guid entityId);
         UserDTO GetUser(Guid entityId);
     }

@@ -35,10 +35,10 @@ namespace iTrebolsoft.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody] ProyectoDTO proyecto)
+        public Guid Post([FromBody] ProyectoDTO proyecto)
         {
-            Service.Insert(proyecto);
-            return Ok(true);
+            return Service.Insert(proyecto);
+            //return Ok(true);
         }
 
         // PUT api/<controller>/5

@@ -7,9 +7,9 @@ namespace Application.IServices
 {
     public interface IProductoService
     {
-        void Insert(ProductoDTO entityDTO);
+        Guid Insert(ProductoDTO entityDTO);
         IList<ProductoDTO> GetAll();
-        void Update(ProductoDTO entityDTO);
+        Guid Update(ProductoDTO entityDTO);
         void Delete(Guid entityId);
         ProductoDTO GetProduct(Guid entityId);
     }

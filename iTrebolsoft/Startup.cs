@@ -123,6 +123,10 @@ namespace iTrebolsoft
             //{
             //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             //});
+            app.UseCors(builder => builder
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin());
 
             app.UseSwaggerDocumentation();
             app.UseAuthentication();

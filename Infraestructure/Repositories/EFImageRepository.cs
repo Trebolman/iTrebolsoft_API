@@ -29,12 +29,14 @@ namespace Infraestructure.Repositories
             }
         }
 
-        public void Save(TImages item)
+        public Guid Save(TImages item)
         {
+            Guid Id;
             if (item.ImageId == Guid.Empty)
             {
                 item.ImageId = Guid.NewGuid();
                 Context.TImages.Add(item);
+                Id = item.ImageId;
             }
             else
             {
@@ -48,8 +50,10 @@ namespace Infraestructure.Repositories
                     dbEntry.FkTBlogPublId = item.FkTBlogPublId;
                     dbEntry.FkTProyProyId = item.FkTProyProyId;
                 }
+                Id = dbEntry.ImageId;
             }
             Context.SaveChangesAsync();
+            return Id;
         }
     }
 }

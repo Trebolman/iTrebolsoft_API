@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ItrebolsoftDbContext))]
-    [Migration("20190128064216_ChangeValuesUser")]
-    partial class ChangeValuesUser
+    [Migration("20190211223657_AzureShit")]
+    partial class AzureShit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

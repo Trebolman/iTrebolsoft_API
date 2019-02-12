@@ -33,22 +33,22 @@ namespace Application.Services
             return Builders.GenericBuilder.builderEntityDTO<ProductoDTO, TProducto>(elemento);
         }
 
-        public void Insert(ProductoDTO entityDTO)
+        public Guid Insert(ProductoDTO entityDTO)
         {
             TProducto entity = Builders.
                         GenericBuilder.
                         builderDTOEntity<TProducto, ProductoDTO>
                         (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
 
-        public void Update(ProductoDTO entityDTO)
+        public Guid Update(ProductoDTO entityDTO)
         {
             var entity = Builders.
                 GenericBuilder.
                 builderDTOEntity<TProducto, ProductoDTO>
                 (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
     }
 }

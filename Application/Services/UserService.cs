@@ -34,28 +34,31 @@ namespace Application.Services
             return Builders.GenericBuilder.builderEntityDTO<UserDTO, TUser>(usuario);
         }
 
-        public void Insert(UserDTO entityDTO)
+        public Guid Insert(UserDTO entityDTO)
         {
             TUser entity = Builders.
                         GenericBuilder.
                         builderDTOEntity<TUser, UserDTO>
                         (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
 
         public void InsertWithID(UserDTO entityDTO)
         {
-            TUser entity = Builders.GenericBuilder.builderDTOEntity<TUser, UserDTO>(entityDTO);
+            TUser entity = Builders.
+                            GenericBuilder.
+                            builderDTOEntity<TUser, UserDTO>
+                            (entityDTO);
             repository.SaveWithId(entity);
         }
 
-        public void Update(UserDTO entityDTO)
+        public Guid Update(UserDTO entityDTO)
         {
             var entity = Builders.
                 GenericBuilder.
                 builderDTOEntity<TUser, UserDTO>
                 (entityDTO);
-            repository.Save(entity);
+            return repository.Save(entity);
         }
     }
 }

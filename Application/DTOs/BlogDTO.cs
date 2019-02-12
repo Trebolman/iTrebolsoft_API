@@ -11,6 +11,6 @@ namespace Application.DTOs
         public string PublDesc { get; set; }
         public string PublBody { get; set; }
         public DateTime PublDate { get; set; }
-        public Guid FkTUserUserId { get; set; }
+        public Guid? FkTUserUserId { get; set; }
     }
 }
