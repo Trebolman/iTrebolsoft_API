@@ -20,6 +20,7 @@ namespace Domain
         public string UserRole { get; set; }
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
+        public string UserPhoto { get; set; }
         public string UserWeb { get; set; }
 
         public virtual ICollection<TBlog> TBlog { get; set; }

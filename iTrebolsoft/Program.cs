@@ -14,20 +14,20 @@ namespace iTrebolsoft
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Run();
-            //CreateWebHostBuilder(args).Build().Run();
+            //CreateWebHostBuilder(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                //.UseKestrel()
-                .UseStartup<Startup>()
-                //.UseIISIntegration()
-                .UseDefaultServiceProvider(options =>
-                options.ValidateScopes = false).Build();
-
-        //public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        //public static IWebHost CreateWebHostBuilder(string[] args) =>
         //    WebHost.CreateDefaultBuilder(args)
-        //        .UseStartup<Startup>();
+        //        //.UseKestrel()
+        //        .UseStartup<Startup>()
+        //        //.UseIISIntegration()
+        //        .UseDefaultServiceProvider(options =>
+        //        options.ValidateScopes = false).Build();
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }

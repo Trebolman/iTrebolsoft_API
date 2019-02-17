@@ -30,10 +30,21 @@ namespace Application.Services
 
         public IList<ImagesDTO> GetAllImageFromPublish(Guid entityId)
         {
-            var entities = repository.Items;
             var elementos = repository.Items.Where(x => x.FkTBlogPublId == entityId);
             return Builders.GenericBuilder.builderListEntityDTO<ImagesDTO,TImages>(elementos);
 
+        }
+
+        public IList<ImagesDTO> GetAllImagesFromProduct(Guid entityId)
+        {
+            var elements = repository.Items.Where(x => x.FkTProductoProdId == entityId);
+            return Builders.GenericBuilder.builderListEntityDTO<ImagesDTO, TImages>(elements);
+        }
+
+        public IList<ImagesDTO> GetAllImagesFromProyect(Guid entityId)
+        {
+            var elements = repository.Items.Where(x => x.FkTProyProyId == entityId);
+            return Builders.GenericBuilder.builderListEntityDTO<ImagesDTO, TImages>(elements);
         }
 
         public ImagesDTO GetImage(Guid entityId)

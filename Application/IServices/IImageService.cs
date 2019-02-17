@@ -10,6 +10,8 @@ namespace Application.IServices
         Guid Insert(ImagesDTO entityDTO);
         IList<ImagesDTO> GetAll();
         IList<ImagesDTO> GetAllImageFromPublish(Guid entityId);
+        IList<ImagesDTO> GetAllImagesFromProyect(Guid entityId);
+        IList<ImagesDTO> GetAllImagesFromProduct(Guid entityId);
         Guid Update(ImagesDTO entityDTO);
         void Delete(Guid entityId);
         ImagesDTO GetImage(Guid entityId);

@@ -23,9 +23,21 @@ namespace iTrebolsoft.Controllers
         }
 
         [HttpGet("GetImagesByPublId/{PublId}")]
-        public IList<ImagesDTO> Post(Guid PublId)
+        public IList<ImagesDTO> GetImagesFromPublish(Guid PublId)
         {
             return Service.GetAllImageFromPublish(PublId);
+        }
+
+        [HttpGet("GetImagesByProyId/{ProyId}")]
+        public IList<ImagesDTO> GetImagesFromProyect(Guid ProyId)
+        {
+            return Service.GetAllImagesFromProyect(ProyId);
+        }
+
+        [HttpGet("GetImagesByProductId/{ProductId}")]
+        public IList<ImagesDTO> GetImagesFromProduct(Guid ProductId)
+        {
+            return Service.GetAllImageFromPublish(ProductId);
         }
 
         // GET api/<controller>/5

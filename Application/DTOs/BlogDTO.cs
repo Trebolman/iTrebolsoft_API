@@ -10,6 +10,8 @@ namespace Application.DTOs
         public string PublName { get; set; }
         public string PublDesc { get; set; }
         public string PublBody { get; set; }
+        public string PublEtiq { get; set; }
+        public int PublCalif { get; set; }
         public DateTime PublDate { get; set; }
         public Guid? FkTUserUserId { get; set; }
     }

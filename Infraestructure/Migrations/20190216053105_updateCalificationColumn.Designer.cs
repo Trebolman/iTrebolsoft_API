@@ -4,14 +4,16 @@ using Infraestructure.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ItrebolsoftDbContext))]
-    partial class ItrebolsoftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190216053105_updateCalificationColumn")]
+    partial class updateCalificationColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,8 +208,6 @@ namespace Infraestructure.Migrations
                         .HasColumnName("user_phone")
                         .HasMaxLength(50)
                         .IsUnicode(false);
-
-                    b.Property<string>("UserPhoto");
 
                     b.Property<string>("UserRole")
                         .HasColumnName("user_role")
