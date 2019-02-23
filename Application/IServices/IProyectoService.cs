@@ -12,5 +12,6 @@ namespace Application.IServices
         Guid Update(ProyectoDTO entityDTO);
         void Delete(Guid entityId);
         ProyectoDTO GetProyecto(Guid entityId);
+        IList<ProyectoDTO> GetProyectoFromUser(Guid UserId);
     }
 }

@@ -24,6 +24,12 @@ namespace iTrebolsoft.Controllers
             return Service.GetAll();
         }
 
+        [HttpGet("GetPublFromUser/{UserId}")]
+        public IList<BlogDTO> GetPublFromUser(Guid UserId)
+        {
+            return Service.GetBlogFromUser(UserId);
+        }
+
         // GET api/<controller>/5
         [HttpGet("{PublId}")]
         public BlogDTO Get(Guid PublId)

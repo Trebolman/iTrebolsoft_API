@@ -4,14 +4,16 @@ using Infraestructure.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ItrebolsoftDbContext))]
-    partial class ItrebolsoftDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190218025756_Nivelando")]
+    partial class Nivelando
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,11 +162,6 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(300)
                         .IsUnicode(false);
 
-                    b.Property<string>("ProyEtiq")
-                        .HasColumnName("proy_etiq")
-                        .HasMaxLength(300)
-                        .IsUnicode(false); ;
-
                     b.Property<string>("ProyTitle")
                         .HasColumnName("proy_title")
                         .HasMaxLength(50)
@@ -210,7 +207,7 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
-                    b.Property<string>("UserLastName")
+                    b.Property<string>("UserLastname")
                         .IsRequired()
                         .HasColumnName("user_last_name")
                         .HasMaxLength(50)

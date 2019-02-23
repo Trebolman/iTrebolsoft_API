@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infraestructure.Migrations
 {
-    public partial class AzureShit : Migration
+    public partial class AzureInitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,12 +14,13 @@ namespace Infraestructure.Migrations
                     user_id = table.Column<Guid>(nullable: false),
                     user_first_name = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     user_last_name = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
-                    user_git = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
+                    user_git = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
                     user_email = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     user_role = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     user_phone = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     user_address = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    user_web = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+                    user_photo = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
+                    user_web = table.Column<string>(unicode: false, maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,8 +33,10 @@ namespace Infraestructure.Migrations
                 {
                     publ_id = table.Column<Guid>(nullable: false),
                     publ_name = table.Column<string>(unicode: false, maxLength: 200, nullable: true),
-                    publ_desc = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    publ_body = table.Column<string>(unicode: false, maxLength: 1000, nullable: true),
+                    publ_desc = table.Column<string>(unicode: false, maxLength: 200, nullable: true),
+                    publ_body = table.Column<string>(unicode: false, maxLength: 5000, nullable: true),
+                    publ_etiq = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
+                    publ_calif = table.Column<int>(unicode: false, maxLength: 200, nullable: true),
                     publ_date = table.Column<DateTime>(type: "date", nullable: true),
                     fk_t_user_user_id = table.Column<Guid>(nullable: true)
                 },
@@ -80,7 +83,8 @@ namespace Infraestructure.Migrations
                     proy_title = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
                     proy_desc = table.Column<string>(unicode: false, maxLength: 300, nullable: true),
                     proy_date = table.Column<DateTime>(type: "date", nullable: true),
-                    fk_t_user_user_id = table.Column<Guid>(nullable: true)
+                    fk_t_user_user_id = table.Column<Guid>(nullable: true),
+                    proy_url = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,7 +103,7 @@ namespace Infraestructure.Migrations
                 {
                     image_id = table.Column<Guid>(nullable: false),
                     image_name = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    image_url = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    image_url = table.Column<string>(unicode: false, maxLength: 200, nullable: true),
                     fk_t_producto_prod_id = table.Column<Guid>(nullable: true),
                     fk_t_blog_publ_id = table.Column<Guid>(nullable: true),
                     fk_t_proy_proy_id = table.Column<Guid>(nullable: true)

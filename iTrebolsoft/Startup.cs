@@ -39,10 +39,12 @@ namespace iTrebolsoft
         {
             services.AddDbContext<ItrebolsoftDbContext>(options =>
             options.UseSqlServer(Configuration["Data:Itrebolsoft:ConnectionString"]));
+            //options.UseMySql("server=www.itrebolsoft.com; database=Itrebolsoft;user=e2n5kqnq8u5b;pwd=Danoshin@7"));
 
             services.AddDbContext<AppIdentityDbContext>(options =>
-           options.UseSqlServer(
-           Configuration["Data:ItrebolsoftIdentity:ConnectionString"]));
+            options.UseSqlServer(Configuration["Data:ItrebolsoftIdentity:ConnectionString"]));
+            //options.UseMySql("server=www.itrebolsoft.com; database=ItrebolsoftIdentity;user=e2n5kqnq8u5b;pwd=Danoshin@7"));
+
 
             services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -107,6 +109,7 @@ namespace iTrebolsoft
             //});
 
             services.AddSwaggerDocumentation();
+            services.AddCors();
             services.AddMvc().AddFluentValidation();
         }
 
@@ -126,7 +129,7 @@ namespace iTrebolsoft
             app.UseCors(builder => builder
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowAnyOrigin());
+            .WithOrigins("https://www.itrebolsoft.com","http://localhost:4200","http://itrebolsoft.com","http://www.itrebolsoft.com","https://itrebolsoft.com"));
 
             app.UseSwaggerDocumentation();
             app.UseAuthentication();

@@ -12,5 +12,6 @@ namespace Application.IServices
         Guid Update(BlogDTO entityDTO);
         void Delete(Guid entityId);
         BlogDTO GetBlog(Guid entityId);
+        IList<BlogDTO> GetBlogFromUser(Guid UserId);
     }
 }

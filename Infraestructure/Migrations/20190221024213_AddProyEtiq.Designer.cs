@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ItrebolsoftDbContext))]
-    [Migration("20190211223657_AzureShit")]
-    partial class AzureShit
+    [Migration("20190221024213_AddProyEtiq")]
+    partial class AddProyEtiq
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,12 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("PublBody")
                         .HasColumnName("publ_body")
-                        .HasMaxLength(1000)
+                        .HasMaxLength(5000)
+                        .IsUnicode(false);
+
+                    b.Property<int?>("PublCalif")
+                        .HasColumnName("publ_calif")
+                        .HasMaxLength(200)
                         .IsUnicode(false);
 
                     b.Property<DateTime?>("PublDate")
@@ -40,7 +45,12 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("PublDesc")
                         .HasColumnName("publ_desc")
-                        .HasMaxLength(50)
+                        .HasMaxLength(200)
+                        .IsUnicode(false);
+
+                    b.Property<string>("PublEtiq")
+                        .HasColumnName("publ_etiq")
+                        .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.Property<string>("PublName")
@@ -76,7 +86,7 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnName("image_url")
-                        .HasMaxLength(50)
+                        .HasMaxLength(200)
                         .IsUnicode(false);
 
                     b.HasKey("ImageId");
@@ -152,8 +162,15 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(300)
                         .IsUnicode(false);
 
+                    b.Property<string>("ProyEtiq");
+
                     b.Property<string>("ProyTitle")
                         .HasColumnName("proy_title")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+
+                    b.Property<string>("ProyUrl")
+                        .HasColumnName("proy_url")
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
@@ -189,10 +206,10 @@ namespace Infraestructure.Migrations
                     b.Property<string>("UserGit")
                         .IsRequired()
                         .HasColumnName("user_git")
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .IsUnicode(false);
 
-                    b.Property<string>("UserLastname")
+                    b.Property<string>("UserLastName")
                         .IsRequired()
                         .HasColumnName("user_last_name")
                         .HasMaxLength(50)
@@ -203,6 +220,11 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<string>("UserPhoto")
+                        .HasColumnName("user_photo")
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
                     b.Property<string>("UserRole")
                         .HasColumnName("user_role")
                         .HasMaxLength(50)
@@ -210,8 +232,8 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("UserWeb")
                         .HasColumnName("user_web")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
 
                     b.HasKey("UserId");
 

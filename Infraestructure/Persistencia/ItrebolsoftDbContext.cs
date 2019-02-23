@@ -37,21 +37,22 @@ namespace Infraestructure.Persistencia
 
             modelBuilder.Entity<TBlog>(entity =>
             {
-                //entity.HasKey(e => e.PublId)
-                //    .HasName("PK_t_blog_1");
                 entity.HasKey(e => e.PublId);
 
                 entity.ToTable("t_blog");
+
+                entity.HasIndex(e => e.FkTUserUserId);
 
                 entity.Property(e => e.PublId)
                     .HasColumnName("publ_id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.FkTUserUserId).HasColumnName("fk_t_user_user_id");
+                entity.Property(e => e.FkTUserUserId).
+                HasColumnName("fk_t_user_user_id");
 
                 entity.Property(e => e.PublBody)
                     .HasColumnName("publ_body")
-                    .HasMaxLength(1000)
+                    .HasMaxLength(5000)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PublDate)
@@ -60,11 +61,21 @@ namespace Infraestructure.Persistencia
 
                 entity.Property(e => e.PublDesc)
                     .HasColumnName("publ_desc")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PublEtiq)
+                    .HasColumnName("publ_etiq")
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PublName)
                     .HasColumnName("publ_name")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PublCalif)
+                    .HasColumnName("publ_calif")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
@@ -79,6 +90,12 @@ namespace Infraestructure.Persistencia
                 entity.HasKey(e => e.ImageId);
 
                 entity.ToTable("t_images");
+
+                entity.HasIndex(e => e.FkTBlogPublId);
+
+                entity.HasIndex(e => e.FkTProductoProdId);
+
+                entity.HasIndex(e => e.FkTProyProyId);
 
                 entity.Property(e => e.ImageId)
                     .HasColumnName("image_id")
@@ -97,7 +114,7 @@ namespace Infraestructure.Persistencia
 
                 entity.Property(e => e.ImageUrl)
                     .HasColumnName("image_url")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.FkTBlogPubl)
@@ -121,6 +138,8 @@ namespace Infraestructure.Persistencia
                 entity.HasKey(e => e.ProdId);
 
                 entity.ToTable("t_producto");
+
+                entity.HasIndex(e => e.FkUserUserId);
 
                 entity.Property(e => e.ProdId)
                     .HasColumnName("prod_id")
@@ -170,6 +189,8 @@ namespace Infraestructure.Persistencia
 
                 entity.ToTable("t_proyectos");
 
+                entity.HasIndex(e => e.FkTUserUserId);
+
                 entity.Property(e => e.ProyId)
                     .HasColumnName("proy_id")
                     .ValueGeneratedNever();
@@ -187,6 +208,11 @@ namespace Infraestructure.Persistencia
 
                 entity.Property(e => e.ProyTitle)
                     .HasColumnName("proy_title")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProyUrl)
+                    .HasColumnName("proy_url")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -223,15 +249,15 @@ namespace Infraestructure.Persistencia
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserLastname)
-                    .IsRequired()
-                    .HasColumnName("user_last_name")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.UserGit)
                     .IsRequired()
                     .HasColumnName("user_git")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserLastName)
+                    .IsRequired()
+                    .HasColumnName("user_last_name")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -247,8 +273,13 @@ namespace Infraestructure.Persistencia
 
                 entity.Property(e => e.UserWeb)
                     .HasColumnName("user_web")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(100)
+                    .IsUnicode(true);
+
+                entity.Property(e => e.UserPhoto)
+                    .HasColumnName("user_photo")
+                    .HasMaxLength(100)
+                    .IsUnicode(true);
             });
         }
     }

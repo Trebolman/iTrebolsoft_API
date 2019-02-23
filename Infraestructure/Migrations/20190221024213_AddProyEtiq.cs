@@ -2,21 +2,21 @@
 
 namespace Infraestructure.Migrations
 {
-    public partial class updateUserPhoto : Migration
+    public partial class AddProyEtiq : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "UserPhoto",
-                table: "t_user",
+                name: "ProyEtiq",
+                table: "t_proyectos",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "UserPhoto",
-                table: "t_user");
+                name: "ProyEtiq",
+                table: "t_proyectos");
         }
     }
 }

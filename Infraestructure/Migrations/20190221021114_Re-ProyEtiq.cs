@@ -1,14 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infraestructure.Migrations
 {
-    public partial class RowVersionToProyecto : Migration
+    public partial class ReProyEtiq : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
-                name: "RowVersion",
+            migrationBuilder.AddColumn<string>(
+                name: "proy_etiq",
                 table: "t_proyectos",
                 nullable: true);
         }
@@ -16,7 +15,7 @@ namespace Infraestructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "RowVersion",
+                name: "ProyEtiq",
                 table: "t_proyectos");
         }
     }

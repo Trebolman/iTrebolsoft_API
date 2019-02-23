@@ -3,23 +3,21 @@ using System;
 using Infraestructure.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ItrebolsoftDbContext))]
-    [Migration("20190216053105_updateCalificationColumn")]
-    partial class updateCalificationColumn
+    [Migration("20190217221331_AzureInitialMigration")]
+    partial class AzureInitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Domain.TBlog", b =>
                 {
@@ -31,10 +29,13 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("PublBody")
                         .HasColumnName("publ_body")
-                        .HasMaxLength(1000)
+                        .HasMaxLength(5000)
                         .IsUnicode(false);
 
-                    b.Property<int?>("PublCalif");
+                    b.Property<int?>("PublCalif")
+                        .HasColumnName("publ_calif")
+                        .HasMaxLength(200)
+                        .IsUnicode(false);
 
                     b.Property<DateTime?>("PublDate")
                         .HasColumnName("publ_date")
@@ -42,10 +43,13 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("PublDesc")
                         .HasColumnName("publ_desc")
-                        .HasMaxLength(50)
+                        .HasMaxLength(200)
                         .IsUnicode(false);
 
-                    b.Property<string>("PublEtiq");
+                    b.Property<string>("PublEtiq")
+                        .HasColumnName("publ_etiq")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
 
                     b.Property<string>("PublName")
                         .HasColumnName("publ_name")
@@ -80,7 +84,7 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnName("image_url")
-                        .HasMaxLength(50)
+                        .HasMaxLength(200)
                         .IsUnicode(false);
 
                     b.HasKey("ImageId");
@@ -161,7 +165,10 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
-                    b.Property<string>("ProyUrl");
+                    b.Property<string>("ProyUrl")
+                        .HasColumnName("proy_url")
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
 
                     b.HasKey("ProyId");
 
@@ -195,7 +202,7 @@ namespace Infraestructure.Migrations
                     b.Property<string>("UserGit")
                         .IsRequired()
                         .HasColumnName("user_git")
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.Property<string>("UserLastname")
@@ -209,6 +216,11 @@ namespace Infraestructure.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<string>("UserPhoto")
+                        .HasColumnName("user_photo")
+                        .HasMaxLength(100)
+                        .IsUnicode(false);
+
                     b.Property<string>("UserRole")
                         .HasColumnName("user_role")
                         .HasMaxLength(50)
@@ -216,7 +228,7 @@ namespace Infraestructure.Migrations
 
                     b.Property<string>("UserWeb")
                         .HasColumnName("user_web")
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.HasKey("UserId");

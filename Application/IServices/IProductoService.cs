@@ -12,5 +12,6 @@ namespace Application.IServices
         Guid Update(ProductoDTO entityDTO);
         void Delete(Guid entityId);
         ProductoDTO GetProduct(Guid entityId);
+        IList<ProductoDTO> GetProdFromUser(Guid UserId);
     }
 }

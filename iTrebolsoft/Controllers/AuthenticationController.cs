@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.IServices;
 using Infraestructure.Transversal.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace iTrebolsoft.Controllers
     public class AuthenticationController : Controller
     {
         IUserAuthService UserAuthService;
+        IUserService UserService;
         public AuthenticationController(IUserAuthService userService)
         {
             this.UserAuthService = userService;
@@ -39,7 +41,7 @@ namespace iTrebolsoft.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddUserAsync(addUserDTO dto)
+        public async Task<ActionResult> AddUserAsync(AddUserDTO dto)
         {
             try
             {

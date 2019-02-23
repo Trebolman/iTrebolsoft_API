@@ -8,7 +8,7 @@ namespace Infraestructure.Transversal.FluentValidations
         public UserDTOValidator()
         {
             RuleFor(x => x.UserFirstName).NotEmpty();
-            RuleFor(x => x.UserLastname).NotEmpty();
+            RuleFor(x => x.UserLastName).NotEmpty();
             RuleFor(x => x.UserRole).NotEmpty();
             RuleFor(x => x.UserEmail).EmailAddress();
             RuleFor(x => x.UserEmail).NotEmpty();

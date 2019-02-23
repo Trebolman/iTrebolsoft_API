@@ -26,9 +26,14 @@ namespace Application.Services
             return Builders.GenericBuilder.builderListEntityDTO<ProductoDTO, TProducto>(ProductEntities);
         }
 
+        public IList<ProductoDTO> GetProdFromUser(Guid UserId)
+        {
+            var elementos = repository.Items.Where(x => x.ProdId == UserId);
+            return Builders.GenericBuilder.builderListEntityDTO<ProductoDTO, TProducto>(elementos);
+        }
+
         public ProductoDTO GetProduct(Guid entityId)
         {
-            var entities = repository.Items;
             var elemento = repository.Items.Where(x => x.ProdId == entityId).FirstOrDefault();
             return Builders.GenericBuilder.builderEntityDTO<ProductoDTO, TProducto>(elemento);
         }

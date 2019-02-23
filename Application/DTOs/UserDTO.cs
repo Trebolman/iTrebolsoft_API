@@ -6,7 +6,7 @@ namespace Application.DTOs
     {
         public Guid UserId { get; set; }
         public string UserFirstName { get; set; }
-        public string UserLastname { get; set; }
+        public string UserLastName { get; set; }
         public string UserGit { get; set; }
         public string UserEmail { get; set; }
         public string UserRole { get; set; }

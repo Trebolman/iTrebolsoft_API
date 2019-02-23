@@ -33,9 +33,14 @@ namespace Application.Services
 
         public BlogDTO GetBlog(Guid entityId)
         {
-            var entities = repository.Items;
             var elemento = repository.Items.Where(x => x.PublId == entityId).FirstOrDefault();
             return Builders.GenericBuilder.builderEntityDTO<BlogDTO, TBlog>(elemento);
+        }
+
+        public IList<BlogDTO> GetBlogFromUser(Guid UserId)
+        {
+            var elementos = repository.Items.Where(x => x.FkTUserUserId == UserId);
+            return Builders.GenericBuilder.builderListEntityDTO<BlogDTO, TBlog>(elementos);
         }
 
         public Guid Insert(BlogDTO entityDTO)

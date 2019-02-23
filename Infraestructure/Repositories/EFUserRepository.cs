@@ -46,11 +46,12 @@ namespace Infraestructure.Repositories
                 if (dbEntry != null)
                 {
                     dbEntry.UserFirstName = item.UserFirstName;
-                    dbEntry.UserLastname = item.UserLastname;
+                    dbEntry.UserLastName = item.UserLastName;
                     dbEntry.UserGit = item.UserGit;
                     dbEntry.UserEmail = item.UserEmail;
                     dbEntry.UserAddress = item.UserAddress;
                     dbEntry.UserPhone = item.UserPhone;
+                    dbEntry.UserPhoto = item.UserPhoto;
                     dbEntry.UserRole = item.UserRole;
                     dbEntry.UserWeb = item.UserWeb;
                 }

@@ -59,17 +59,36 @@ namespace Infraestructure.Transversal.Authentication
             return null;
         }
 
-        public async Task AddUserAsync(addUserDTO dto)
+        public async Task AddUser(AddUserDTO dto, Guid NewId)
+        {
+            //this.AddUserAsync(dto);
+            UserDTO userDTO = new UserDTO()
+            {
+                UserId = NewId,
+                UserFirstName = dto.UserFirstName,
+                UserLastName = dto.UserLastName,
+                UserGit = dto.UserGit,
+                UserEmail = dto.UserEmail,
+                UserRole = dto.UserRole,
+                UserPhone = dto.UserPhone,
+                UserAddress = dto.UserAddress,
+                UserPhoto = dto.UserPhoto,
+                UserWeb = dto.UserWeb
+            };
+            await ServiceUser.InsertWithID(userDTO);
+        }
+        public async Task AddUserAsync(AddUserDTO dto)
         {
             IdentityUser userExist = await userManager.FindByNameAsync(dto.UserName);
-            if(userExist == null)
+            if (userExist == null)
             {
                 Guid NewId = Guid.NewGuid();
+                //await this.AddUser(dto, NewId);
                 userExist = new IdentityUser(dto.UserName);
                 userExist.Id = NewId.ToString();
                 IdentityResult result = await userManager.CreateAsync(userExist, dto.Password);
                 StringBuilder StringError = new StringBuilder();
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     StringError.Append(error.Description);
                     StringError.Append("\n");
@@ -86,13 +105,14 @@ namespace Infraestructure.Transversal.Authentication
                         UserAddress = dto.UserAddress,
                         UserEmail = dto.UserEmail,
                         UserFirstName = dto.UserFirstName,
-                        UserLastname = dto.UserLastname,
+                        UserLastName = dto.UserLastName,
                         UserGit = dto.UserGit,
                         UserPhone = dto.UserPhone,
+                        UserPhoto = dto.UserPhoto,
                         UserRole = dto.UserRole,
                         UserWeb = dto.UserWeb
                     };
-                    ServiceUser.InsertWithID(userDTO);
+                    await ServiceUser.InsertWithID(userDTO);
                 }
             }
             else
@@ -100,6 +120,7 @@ namespace Infraestructure.Transversal.Authentication
                 throw new Exception($"The username({dto.UserName}) is being used");
             }
         }
+
 
         public class AppSettings
         {

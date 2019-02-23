@@ -52,6 +52,7 @@ namespace Infraestructure.Repositories
                     dbEntry.ProyTitle = item.ProyTitle;
                     dbEntry.ProyDesc = item.ProyDesc;
                     dbEntry.ProyDate = item.ProyDate;
+                    dbEntry.ProyEtiq = item.ProyEtiq;
                     dbEntry.FkTUserUserId = item.FkTUserUserId;
                 }
                 Id = dbEntry.ProyId;

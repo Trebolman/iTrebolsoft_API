@@ -28,9 +28,14 @@ namespace Application.Services
 
         public ProyectoDTO GetProyecto(Guid entityId)
         {
-            var entities = repository.Items;
             var elemento = repository.Items.Where(x => x.ProyId == entityId).FirstOrDefault();
             return Builders.GenericBuilder.builderEntityDTO<ProyectoDTO, TProyectos>(elemento);
+        }
+
+        public IList<ProyectoDTO> GetProyectoFromUser(Guid UserId)
+        {
+            var elementos = repository.Items.Where(x => x.FkTUserUserId == UserId);
+            return Builders.GenericBuilder.builderListEntityDTO<ProyectoDTO, TProyectos>(elementos);
         }
 
         public Guid Insert(ProyectoDTO entityDTO)

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -43,13 +44,13 @@ namespace Application.Services
             return repository.Save(entity);
         }
 
-        public void InsertWithID(UserDTO entityDTO)
+        public async Task InsertWithID(UserDTO entityDTO)
         {
             TUser entity = Builders.
                             GenericBuilder.
                             builderDTOEntity<TUser, UserDTO>
                             (entityDTO);
-            repository.SaveWithId(entity);
+            await repository.SaveWithId(entity);
         }
 
         public Guid Update(UserDTO entityDTO)

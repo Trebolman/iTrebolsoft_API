@@ -84,5 +84,27 @@ namespace iTrebolsoft.Controllers
             }
             return Ok(true);
         }
+
+        [HttpDelete("DeleteImageByProyId/{ProyId}")]
+        public IActionResult DeleteImageProy(Guid ProyId)
+        {
+            var ImagesProy = Service.GetAllImagesFromProyect(ProyId);
+            foreach (var Image in ImagesProy)
+            {
+                Service.Delete(Image.ImageId);
+            }
+            return Ok(true);
+        }
+
+        [HttpDelete("DeleteImageByProdId/{ProdId}")]
+        public IActionResult DeleteImageProd(Guid ProdId)
+        {
+            var ImagesProd = Service.GetAllImagesFromProduct(ProdId);
+            foreach (var Image in ImagesProd)
+            {
+                Service.Delete(Image.ImageId);
+            }
+            return Ok(true);
+        }
     }
 }

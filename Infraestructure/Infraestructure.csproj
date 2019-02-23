@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190127225920_RowVersionToProyecto.cs" />
-    <Compile Remove="Migrations\20190127225920_RowVersionToProyecto.Designer.cs" />
-    <Compile Remove="Migrations\20190128054201_InitMigration.cs" />
-    <Compile Remove="Migrations\20190128054201_InitMigration.Designer.cs" />
+    <Compile Remove="Migrations\20190221023748_Re-Re-ProyEtiq.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

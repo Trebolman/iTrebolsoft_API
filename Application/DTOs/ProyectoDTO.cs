@@ -9,6 +9,7 @@ namespace Application.DTOs
         public string ProyDesc { get; set; }
         public string ProyUrl { get; set; }
         public DateTime? ProyDate { get; set; }
+        public string ProyEtiq { get; set; }
         public Guid? FkTUserUserId { get; set; }
     }
 }

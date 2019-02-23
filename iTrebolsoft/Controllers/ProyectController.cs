@@ -24,6 +24,12 @@ namespace iTrebolsoft.Controllers
             return Service.GetAll();
         }
 
+        [HttpGet("GetProyFromUser/{UserId}")]
+        public IList<ProyectoDTO> GetProyFromUser(Guid UserId)
+        {
+            return Service.GetProyectoFromUser(UserId);
+        }
+
         // GET api/<controller>/5
         [HttpGet("{ProyId}")]
         public ProyectoDTO Get(Guid ProyId)
